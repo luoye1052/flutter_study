@@ -121,7 +121,7 @@ class EchoRoute extends StatelessWidget {
         title: Text("Echo route"),
       ),
       body: Center(
-        //回显tip内容
+        //回显tip内容1
         child: Text(tip),
       ),
     );
