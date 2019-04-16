@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/SwitchAndCheckBoxTestRoute.dart';
 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Flutter Demo1',
+      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      routes:{
-        "new_page":(context)=>NewRoute(),
-        "tip_widgets":(context)=>EchoRoute("内容固定"),
-      } ,
+//      routes:{
+//        "new_page":(context)=>NewRoute(),
+//        "tip_widgets":(context)=>EchoRoute(),
+//        "Padding_example":(context)=>PaddingTestRoute(),
+//      } ,
       home: new MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -57,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               textColor: Colors.blue,
               onPressed: () {
 //                debugDumpApp();
-                Navigator.pushNamed(context, "new_page");
+                Navigator.pushNamed(context, "Padding_example");
                 //导航到新路由
 //                Navigator.push( context,
 //                    new MaterialPageRoute(builder: (context) {
@@ -103,26 +106,55 @@ class NewRoute extends StatelessWidget {
                 colorBlendMode: BlendMode.difference,
               ),
               SwitchAndCheckBoxTestRoute(),
+              new Expanded(
+                child: Image(
+                  image: AssetImage("image/lake.jpg"),
+                  width: 100.0,
+                ),
+              ),
+
+      Column(
+        //测试Row对齐方式，排除Column默认居中对齐的干扰
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(" hello world "),
+              Text(" I am Jack "),
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(" hello world "),
+              Text(" I am Jack "),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            textDirection: TextDirection.rtl,
+            children: <Widget>[
+              Text(" hello world "),
+              Text(" I am Jack "),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            verticalDirection: VerticalDirection.up,
+            children: <Widget>[
+              Text(" hello world ", style: TextStyle(fontSize: 30.0),),
+              Text(" I am Jack "),
+            ],
+          ),
+        ],
+      ),
+
+
+
             ],
           )
-      ),
-    );
-  }
-}
-class EchoRoute extends StatelessWidget {
-  EchoRoute(this.tip);
-
-  final String tip;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Echo route"),
-      ),
-      body: Center(
-        //回显tip内容12
-        child: Text(tip),
       ),
     );
   }

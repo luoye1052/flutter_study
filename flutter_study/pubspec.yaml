@@ -28,11 +28,15 @@ dependencies:
   vector_math: 2.0.8
   english_words: ^3.1.0
   transparent_image: ^1.0.0
+  json_annotation: ^2.0.0
+  dio: ^2.1.2
+  flutter_webview_plugin: ^0.3.0+2
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
-
+   sdk: flutter
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
