@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/view/tbar_view.dart';
-import 'package:flutter_study/view/homepage_list.dart';
 import 'package:flutter_study/router/application.dart';
 import 'package:flutter_study/router/routes.dart';
 import 'package:fluro/fluro.dart';
@@ -27,7 +26,7 @@ class _MyAppState extends State<MyApp>  {
 //        "tip_widgets":(context)=>EchoRoute(),
 //        "Padding_example":(context)=>PaddingTestRoute(),
 //      } ,
-      home: MyTb(listView:new MyListView()),
+      home: MyTb(),
     );
   }
 }

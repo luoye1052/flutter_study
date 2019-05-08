@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study/SwitchAndCheckBoxTestRoute.dart';
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,7 +14,8 @@ class MyApp extends StatelessWidget {
 //        "tip_widgets":(context)=>EchoRoute(),
 //        "Padding_example":(context)=>PaddingTestRoute(),
 //      } ,
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+//      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new FlexLayoutTestRoute(),
     );
   }
 }
@@ -88,74 +87,96 @@ class NewRoute extends StatelessWidget {
         title: Text("New route"),
 
       ),
-      body: Center(
-          child: new Column(
-            children: <Widget>[
-
-              Image(
-                image: AssetImage("image/lake.jpg"),
-                width: 100.0,
-                color: Colors.blue,
-                colorBlendMode: BlendMode.difference,
+      body: Padding(
+        //上下左右各添加16像素补白
+        padding: EdgeInsets.all(16.0),
+    child: Column(
+    //显式指定对齐方式为左对齐，排除对齐干扰
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+    Padding(
+    //左边添加8像素补白
+    padding: const EdgeInsets.only(left: 8.0),
+    child: Text("Hello world"),
+    ),
+    Expanded(
+      child:Container(
+        color: Colors.green,
+        child:  Padding(
+          // 分别指定四个方向的补白
+          padding: const EdgeInsets.fromLTRB(20.0,30.0,20.0,20.0),
+          child: Text("Your friendesdrftgyuhjikoazsxdcfvghbjrtfygiuhijwserdtfygwestrdytfwaestrdytxryctuvybuhrxdctfvygnksdxfcgvh"),
+        ),
+      ) ,
+    ),
+    Padding(
+      //上下各添加8像素补白
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+//    padding: const EdgeInsets.only(left: 8.0),
+      child: Text("I am Jack"),
+    ),
+    ],
+    ),
+    ),
+    );
+  }
+}
+class FlexLayoutTestRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        //Flex的两个子widget按1：2来占据水平空间
+        Flex(
+          direction: Axis.horizontal,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Container(
+                height: 60.0,
+                color: Colors.red,
               ),
-
-              Image(
-                image: AssetImage("image/lake.jpg"),
-                width: 100.0,
-                color: Colors.blue,
-                colorBlendMode: BlendMode.difference,
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                height: 30.0,
+                color: Colors.green,
               ),
-              SwitchAndCheckBoxTestRoute(),
-              new Expanded(
-                child: Image(
-                  image: AssetImage("image/lake.jpg"),
-                  width: 100.0,
+            ),
+          ],
+        ),
+        Padding(
+          
+          padding: const EdgeInsets.only(top: 20.0),
+          child: SizedBox(
+            height: 200.0,
+            //Flex的三个子widget，在垂直方向按2：1：1来占用100像素的空间
+            child: Flex(
+              direction: Axis.vertical,
+              children: <Widget>[
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 30.0,
+                    color: Colors.red,
+                  ),
                 ),
-              ),
-
-      Column(
-        //测试Row对齐方式，排除Column默认居中对齐的干扰
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(" hello world "),
-              Text(" I am Jack "),
-            ],
+                Spacer(
+                  flex: 1,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: 30.0,
+                    color: Colors.green,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(" hello world "),
-              Text(" I am Jack "),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            textDirection: TextDirection.rtl,
-            children: <Widget>[
-              Text(" hello world "),
-              Text(" I am Jack "),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            verticalDirection: VerticalDirection.up,
-            children: <Widget>[
-              Text(" hello world ", style: TextStyle(fontSize: 30.0),),
-              Text(" I am Jack "),
-            ],
-          ),
-        ],
-      ),
-
-
-
-            ],
-          )
-      ),
+        ),
+      ],
     );
   }
 }

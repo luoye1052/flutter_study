@@ -1,18 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/chouti.dart';
+import 'package:flutter_study/view/homepage_list.dart';
+import 'package:flutter_study/view/PinsPage_list.dart';
+import 'package:flutter_study/view/book_page.dart';
+import 'package:flutter_study/view/custom_repos_list.dart';
 
 class MyTb extends StatefulWidget {
-  MyTb({Key key, this.listView}) : super(key: key);
-  final Widget listView;
+  MyTb({Key key}) : super(key: key);
   @override
   createState() => new MyTbState();
 }
 
 
-class MyTbState extends State<MyTb> {
+class MyTbState extends State<MyTb> with SingleTickerProviderStateMixin {
 
-//  final _sts = <String>["tip_widgets","Padding_example","tip_widgets","Padding_example","tip_widgets","Padding_example","tip_widgets","Padding_example"];
-//  final _biggerFont = const TextStyle(fontSize: 18.0);
+  TabController _tabController;
+  final List<Tab> _bottomTabs = <Tab>[
+    Tab(
+      text: '首页',
+      icon: Icon(Icons.home),
+    ),
+    Tab(
+      text: '沸点',
+      icon: Icon(Icons.chat),
+    ),
+    Tab(
+      text: '小册',
+      icon: Icon(Icons.book),
+    ),
+    Tab(
+      text: '开源库',
+      icon: Icon(Icons.bubble_chart),
+    ),
+    Tab(
+      text: '活动',
+      icon: Icon(Icons.local_activity),
+    ),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(initialIndex: 0, length: _bottomTabs.length,vsync: this);
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -22,27 +52,31 @@ class MyTbState extends State<MyTb> {
           new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
         ],
       ),
-      body: widget.listView,
+//      body: widget.listView,
       drawer: new MyDrawer(), //抽屉
-      bottomNavigationBar: BottomNavigationBar( // 底部导航
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
-          BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('动态')),
-          BottomNavigationBarItem(icon: Icon(Icons.school), title: Text('发现')),
-          BottomNavigationBarItem(icon: Icon(Icons.comment), title: Text('小册')),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle), title: Text('我')),
+      body: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          MyListView(),
+          PinsPage(),
+          BookPage(),
+          CustomReposList(),
         ],
-        currentIndex: 0,
-        fixedColor: Colors.blue,
-        onTap: _onItemTapped,
+      ),
+      bottomNavigationBar: new Material(
+        color: Theme.of(context).primaryColor,
+        child: TabBar(
+          tabs: _bottomTabs,
+          controller: _tabController,
+          indicatorColor: Colors.white,
+        ),
       ),
     );
   }
 
-  void _onItemTapped(int index) {
-
-  }
+//  void _onItemTapped(int index) {
+//
+//  }
 //  void _onAdd(){
 //
 //  }

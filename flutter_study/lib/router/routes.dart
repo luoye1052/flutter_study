@@ -4,6 +4,7 @@ import 'package:flutter_study/router/router_handler.dart';
 class Routes {
   static String root = '/';
   static String webView = "/webView";
+  static String picView = "/pic";
 
   static void defineRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -11,5 +12,6 @@ class Routes {
           print("ROUTE WAS NOT FOUND !!!");
         });
     router.define(webView, handler: webViewHandler);
+    router.define(picView, handler: PicViewHandlerHandler);
   }
 }

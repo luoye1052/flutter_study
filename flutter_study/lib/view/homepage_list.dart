@@ -3,7 +3,7 @@ import 'package:flutter_study/view//intextdot.dart';
 import 'package:flutter_study/view/good_CommentCell.dart';
 import 'dart:async';
 import 'package:flutter_study/model/entrylist.dart';
-import 'package:flutter_study/tool/net_utils.dart';
+import 'package:flutter_study/tool/data_utils.dart';
 import 'package:flutter_study/router/application.dart';
 import 'package:flutter_study/constants/constants.dart';
 
@@ -82,11 +82,11 @@ class MyListViewState extends State<MyListView> {
   }
   Widget _messageRow(Entrylist model,int a) {
     return Container(
-      decoration: new BoxDecoration(
-        border: new Border.all(width: 2.0, color: Colors.red),
-        color: Colors.grey.shade300,
-        borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
-      ),
+//      decoration: new BoxDecoration(
+//        border: new Border.all(width: 2.0, color: Colors.grey.shade300),
+//        color: Colors.white,
+//        borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
+//      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -144,16 +144,7 @@ class MyListViewState extends State<MyListView> {
       });
     return null;
   }
-  static Future<List> getIndexListData(Map<String,dynamic> params) async {
-    var response =await  NetUtils.get('https://timeline-merger-ms.juejin.im/v1/get_entry_by_rank', params:params);
-    var responseList = response['d']['entrylist'];
-    List modelList=List();
-    for (int i = 0; i < responseList.length; i++) {
-      Entrylist u= new Entrylist.fromJson(responseList[i]);
-      modelList.add(u);
-    }
-    return modelList;
-  }
+
   void _getList(bool isFrist){
     if(_isRefrushing){
       return;
@@ -161,12 +152,12 @@ class MyListViewState extends State<MyListView> {
     if((!isFrist)&(pageIndexArray.length>_page)){
       _params['before']=pageIndexArray[_page];
       _page++;
-      print('${_page}');
+//      print('${_page}');
     }
     if(isFrist){
       _params['before']=pageIndexArray[0];
     }
-    getIndexListData(_params).then((result) {
+    DataUtils.getIndexListData(_params).then((result) {
       setState(() {
         if(isFrist){
           _dataList = result;
