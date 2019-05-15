@@ -4,6 +4,7 @@ import 'package:flutter_study/view/homepage_list.dart';
 import 'package:flutter_study/view/PinsPage_list.dart';
 import 'package:flutter_study/view/book_page.dart';
 import 'package:flutter_study/view/custom_repos_list.dart';
+import 'package:flutter_study/view/active_page.dart';
 
 class MyTb extends StatefulWidget {
   MyTb({Key key}) : super(key: key);
@@ -61,6 +62,7 @@ class MyTbState extends State<MyTb> with SingleTickerProviderStateMixin {
           PinsPage(),
           BookPage(),
           CustomReposList(),
+          ActivePage()
         ],
       ),
       bottomNavigationBar: new Material(

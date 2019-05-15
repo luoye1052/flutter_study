@@ -5,18 +5,21 @@ import 'package:flutter_study/tool/data_utils.dart';
 import 'package:flutter_study/Stack_example.dart';
 
 class BookList extends StatefulWidget{
+  final String score;
+  BookList(this.score);
   _BookListState createState() => _BookListState();
 }
 class _BookListState extends State<BookList>{
   ScrollController _scrollController = new ScrollController();
   List _dataList;
-  Map<String,dynamic>  _params={'alias':'frontend','pageNum':2};
+  Map<String,dynamic>  _params;
   @override
   Widget build(BuildContext context) {
     return _buildSuggestions();
    }
   @override
   void initState() {
+    _params={'alias':widget.score,'pageNum':2};
     super.initState();
     _getList();
   }
@@ -72,7 +75,7 @@ class _BookListState extends State<BookList>{
         crossAxisAlignment:CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Image.network('https://user-gold-cdn.xitu.io/2017/11/20/15fd699517c3c6a4?w=650&h=910&f=png&s=200522',
+          Image.network(model.img,
             width: 100,
             height: 150,
           ),

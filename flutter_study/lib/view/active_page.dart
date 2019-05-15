@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study/model/navList.dart';
+import 'package:flutter_study/model/cityList.dart';
 import 'package:flutter_study/tool/data_utils.dart';
 import 'package:flutter_study/view/book_list.dart';
-//class bookPage extends StatefulWidget{
-//  @override
-//  createrBookPage()=>MyBookPage();
-//}
-//class MyBookPage extends State<bookPage>{
-//  @override
-//  Widget build(BuildContext context) {
-//    // TODO: implement build
-//    return ;
-//  }
-//}
-class BookPage extends StatefulWidget {
-  _BookPageState createState() => _BookPageState();
+import 'package:flutter_study/view/active_list.dart';
+
+class ActivePage extends StatefulWidget {
+  _ActivePageState createState() => _ActivePageState();
 }
 
-class _BookPageState extends State<BookPage>
+class _ActivePageState extends State<ActivePage>
     with SingleTickerProviderStateMixin  {
-  List<NavList> _navData = new List();
+  List<CityList> _navData = new List();
+  Map<String,dynamic>  _params={'src':'web','limit':20};
   List<Tab> _myTabs = <Tab>[
     Tab(
       text: '全部',
     )
   ];
-  List<BookList> _myTabView = <BookList>[
+  List<ActiveList> _myTabView = <ActiveList>[
 //    MyApp(),
-    BookList(''),
+    ActiveList(''),
   ];
 
   TabController _tabController;
@@ -35,16 +27,17 @@ class _BookPageState extends State<BookPage>
   @override
   void initState() {
     super.initState();
-    getNavList();
+    getCityList();
   }
 
-  getNavList() {
-    DataUtils.getNavListData().then((resultData) {
+  getCityList() {
+    DataUtils.getCityListData(_params).then((resultData) {
       resultData.forEach((model) {
         _myTabs.add(Tab(
-          text: model.name,
+          text: model.cityName,
+
         ));
-        _myTabView.add(BookList(model.score));
+        _myTabView.add(ActiveList(model.cityName));
       });
       if (this.mounted) {
         setState(() {

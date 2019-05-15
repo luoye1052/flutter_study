@@ -5,6 +5,8 @@ import 'package:flutter_study/model/entrylist.dart';
 import 'package:flutter_study/model/navList.dart';
 import 'package:flutter_study/model/page_list.dart';
 import 'package:flutter_study/model/custom_repos.dart';
+import 'package:flutter_study/model/cityList.dart';
+import 'package:flutter_study/model/event_list.dart';
 
 class DataUtils{
 
@@ -57,6 +59,27 @@ class DataUtils{
     List modelList=List();
     for (int i = 0; i < responseList.length; i++) {
       CustomRepos u= new CustomRepos.fromJson(responseList[i]);
+      modelList.add(u);
+    }
+    return modelList;
+  }
+  static Future<List> getCityListData(Map<String, dynamic> params) async {
+    var response = await NetUtils.get(Api.ACTIVITY_CITY, params: params);
+    var responseList = response['d'];
+    List<CityList> modelList=List();
+    for (int i = 0; i < responseList.length; i++) {
+      CityList u= new CityList.fromJson(responseList[i]);
+      modelList.add(u);
+    }
+    return modelList;
+  }
+
+  static Future<List> getEvenListData(Map<String, dynamic> params) async {
+    var response = await NetUtils.get(Api.ACTIVITY_LIST, params: params);
+    var responseList = response['d'];
+    List modelList=List();
+    for (int i = 0; i < responseList.length; i++) {
+      EvenList u= new EvenList.fromJson(responseList[i]);
       modelList.add(u);
     }
     return modelList;
